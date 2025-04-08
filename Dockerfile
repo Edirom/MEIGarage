@@ -9,7 +9,7 @@ FROM tomcat:9-jdk11
 
 
 LABEL org.opencontainers.image.source=https://github.com/edirom/meigarage
-LABEL maintainer="Anne Ferger and Peter Stadler for the ViFE"
+LABEL org.opencontainers.image.authors="Anne Ferger and Peter Stadler for the ViFE"
 
 ARG VERSION_STYLESHEET=latest
 ARG VERSION_ODD=latest

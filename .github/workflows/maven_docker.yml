@@ -96,3 +96,18 @@ jobs:
           password: ${{ secrets.VIFEBOT_DOCKERHUB_TOKEN }}
           repository: edirom/meigarage
           short-description: ${{ github.event.repository.description }}
+
+  clean:
+    name: remove untagged images from Github package registry
+    runs-on: ubuntu-latest
+    needs: docker
+    steps:
+      - name: ghcr.io cleanup action
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          package: meigarage
+          delete-untagged: true
+          dry-run: false
+          validate: true
+          older-than: 2 weeks
+          token: ${{ secrets.GITHUB_TOKEN }}
