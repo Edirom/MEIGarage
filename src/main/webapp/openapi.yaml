@@ -1,8 +1,7 @@
 openapi: 3.0.1
 info:
   title: EGE Webservice
-  description: "EGE Webservice API to convert, validate and customize MEI related\
-    \ data."
+  description: EGE Webservice API to convert, validate and customize MEI related data.
   contact:
     name: Anne Ferger
     url: https://github.com/Edirom/MEIGarage
@@ -10,68 +9,73 @@ info:
   license:
     name: ' GPL-3.0 license'
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
-  version: "1.0"
+  version: '1.0'
 externalDocs:
   description: find out more at GitHub
   url: https://github.com/Edirom/MEIGarage
 tags:
-- name: ege-webservice
-  description: "Conversion, Validation and Customization"
+  - name: ege-webservice
+    description: Conversion, Validation and Customization
 paths:
   /ege-webservice/Conversions:
     get:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Get all available conversions
-      description: Return list of input data types and lists of possible conversions
-        paths
+      description: Return list of input data types and lists of possible conversions paths
       operationId: doGet
       responses:
-        "200":
+        '200':
           description: List of possible conversions is returned
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/Conversions'
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
   /ege-webservice/Conversions/{input-document-type}/{output-document-type}:
     post:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Do conversions
       description: Convert files into different data formats
       operationId: doPost
       parameters:
-      - name: properties
-        in: query
-        description: Conversion properties
-        schema:
-          type: string
-        example: '<conversions><conversion index="0"><property id="oxgarage.getImages">true</property><property id="oxgarage.getOnlineImages">true</property><property id="oxgarage.lang">en</property><property id="oxgarage.textOnly">false</property><property id="pl.psnc.dl.ege.tei.profileNames">default</property></conversion></conversions>'
-      - name: input-document-type
-        in: path
-        description: Input document type
-        required: true
-        schema:
-          $ref: '#/components/schemas/DataInputType'
-      - name: output-document-type
-        in: path
-        description: Output document type
-        required: true
-        schema:
-          $ref: '#/components/schemas/DataOutputType'
+        - name: properties
+          in: query
+          description: Conversion properties
+          schema:
+            type: string
+          example: >-
+            <conversions><conversion index="0"><property
+            id="oxgarage.getImages">true</property><property
+            id="oxgarage.getOnlineImages">true</property><property
+            id="oxgarage.lang">en</property><property
+            id="oxgarage.textOnly">false</property><property
+            id="pl.psnc.dl.ege.tei.profileNames">default</property></conversion></conversions>
+        - name: input-document-type
+          in: path
+          description: Input document type
+          required: true
+          schema:
+            $ref: '#/components/schemas/DataInputType'
+        - name: output-document-type
+          in: path
+          description: Output document type
+          required: true
+          schema:
+            $ref: '#/components/schemas/DataOutputType'
       requestBody:
-        content: 
-          multipart/form-data: # Media type
-            schema:            # Request payload
+        content:
+          multipart/form-data:
+            schema:
               type: object
-              properties:      # Request parts
-                fileToConvert:  # Part 3 (an image)
+              properties:
+                fileToConvert:
                   type: string
                   format: binary
       responses:
-        "200":
+        '200':
           description: The content of the converted file
           content:
             application/pdf:
@@ -81,192 +85,202 @@ paths:
               examples:
                 sampleFile:
                   summary: A sample file
-                  externalValue: 'https://tei-c.org/release/doc/tei-p5-doc/en/Guidelines.pdf'
-        "405":
+                  externalValue: https://tei-c.org/release/doc/tei-p5-doc/en/Guidelines.pdf
+        '405':
           description: Wrong method error message if the method is called wrong
   /ege-webservice/Customization:
     get:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Get all available customizations
-      description: Return list of input data types and lists of possible customization
+      description: >-
+        Return list of input data types and lists of possible customization
         paths
       operationId: doGet_1
       responses:
-        "200":
+        '200':
           description: List of possible conversions is returned
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/Customization'
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
-  /ege-webservice/Customization/{customization-setting}/{source}/{customization}:
+  /ege-webservice/Customization/{customization-setting}/{source}/{customization}/{output-document-type}:
     post:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Do customizations
       description: Customize files into different data formats
       operationId: doPost_1
       parameters:
-      - name: customization-setting
-        in: path
-        description: Customization Setting
-        required: true
-        schema:
-          type: string
-          format: text/plain
-        example: 'mei'
-      - name: source
-        in: path
-        description: Source
-        required: true
-        schema:
-          type: string
-          format: text/plain
-        example: 'mei401'
-      - name: customization
-        in: path
-        description: Customization
-        required: true
-        schema:
-          type: string
-          format: text/plain
-        example: 'c-mei-all'
+        - name: customization-setting
+          in: path
+          description: Customization Setting
+          required: true
+          schema:
+            type: string
+            format: text/plain
+          example: mei
+        - name: source
+          in: path
+          description: Source
+          required: true
+          schema:
+            type: string
+            format: text/plain
+          example: mei401
+        - name: customization
+          in: path
+          description: Customization
+          required: true
+          schema:
+            type: string
+            format: text/plain
+          example: c-mei-all
+        - name: output-document-type
+          in: path
+          description: Customization
+          required: true
+          schema:
+            type: string
+            format: text/plain
+          example: RelaxNG
       requestBody:
-        content: 
-          multipart/form-data: # Media type
-            schema:            # Request payload
+        content:
+          multipart/form-data:
+            schema:
               type: object
-              properties:      # Request parts
-                fileToConvert:  # Part 3 (an image)
+              properties:
+                fileToConvert:
                   type: string
                   format: binary
       responses:
-        "200":
+        '200':
           description: The content of the customized file
           content:
             application/octet-stream:
               schema:
                 type: string
                 format: binary
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
   /ege-webservice/Info:
     get:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Get info on webservice
       description: Return list of info on webservice
       operationId: doGet_2
       responses:
-        "200":
+        '200':
           description: List of info is returned
           content:
             application/json: {}
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
   /ege-webservice/Validation:
     get:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Get all available validations
-      description: Return list of input data types and lists of possible validation
-        paths
+      description: Return list of input data types and lists of possible validation paths
       operationId: doGet_3
       responses:
-        "200":
+        '200':
           description: List of possible validations is returned
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/Validations'
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
   /ege-webservice/Validation/{input-document-type}:
     post:
       tags:
-      - ege-webservice
+        - ege-webservice
       summary: Do validation
       description: Validate files of different data formats
       operationId: doPost_2
       parameters:
-      - name: input-document-type
-        in: path
-        description: Input document type
-        required: true
-        schema:
-          $ref: '#/components/schemas/DataInputType'
+        - name: input-document-type
+          in: path
+          description: Input document type
+          required: true
+          schema:
+            $ref: '#/components/schemas/DataInputType'
       requestBody:
-        content: 
-          multipart/form-data: # Media type
-            schema:            # Request payload
+        content:
+          multipart/form-data:
+            schema:
               type: object
-              properties:      # Request parts
-                fileToConvert:  # Part 3 (an image)
+              properties:
+                fileToConvert:
                   type: string
                   format: binary
       responses:
-        "200":
+        '200':
           description: Validation Result
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ValidationResult'
-        "405":
+        '405':
           description: Wrong method error message if the method is called wrong
 components:
   schemas:
     Conversions:
       type: object
       xml:
-        name: 'input-data-types'
+        name: input-data-types
       properties:
         InputDataType:
           type: object
           xml:
-              name: 'input-data-type'
+            name: input-data-type
           properties:
             id:
               type: string
               xml:
                 attribute: true
-              example: 'Documents:TEI P5 XML Document:TEI,text/xml'
+              example: mei40,text/xml:mei40,text/xml
             xlink-href:
               type: string
               xml:
                 attribute: true
-              example: 'https://teigarage.tei-c.de/ege-webservice/Conversions/TEI%3Atext%3Axml/'
+              example: >-
+                https://meigarage.edirom.de/ege-webservice/Conversions/mei40%3Atext%3Axml/
     Validations:
       type: object
       xml:
-        name: 'validations'
+        name: validations
       properties:
         InputDataType:
           type: object
           xml:
-              name: 'input-data-type'
+            name: input-data-type
           properties:
             id:
               type: string
               xml:
                 attribute: true
-              example: 'Documents:TEI P5 XML Document:TEI,text/xml'
+              example: Documents:mei40,text/xml:mei40,text/xml
             xlink-href:
               type: string
               xml:
                 attribute: true
-              example: 'https://teigarage.tei-c.de/ege-webservice/Validation/TEI%3Atext%3Axml/'
+              example: >-
+                https://meigarage.edirom.de/ege-webservice/Validation/mei40%3Atext%3Axml/
     DataInputType:
       type: string
-      example: 'TEI:text:xml'
+      example: mei40:text:xml
     DataOutputType:
       type: string
-      example: 'odt:application:vnd.oasis.opendocument.text'
+      example: pdf-verovio:application:pdf
     ValidationResult:
       type: object
       xml:
-        name: 'validation-result'
+        name: validation-result
       properties:
         status:
           type: string
@@ -277,98 +291,99 @@ components:
         messages:
           type: array
           xml:
-            name: 'messages'
-            wrapped : true
+            name: messages
+            wrapped: true
           items:
             type: string
             xml:
-              name: 'message'
+              name: message
     Customization:
       type: object
       xml:
-        name: 'customizations'
+        name: customizations
       properties:
         InputDataType:
           type: object
           xml:
-              name: 'customization-setting'
+            name: customization-setting
           properties:
             id:
               type: string
               xml:
                 attribute: true
-              example: 'mei'
+              example: mei
             sources:
-                type: object
-                xml:
-                  name: 'sources'
-                properties:
-                  source:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'mei401'
-                      name:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'MEI v4.0.1'
-                      type:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'type_server-file'
-                      path:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'source/mei-source_canonicalized.xml'
+              type: object
+              xml:
+                name: sources
+              properties:
+                source:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: mei401
+                    name:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: MEI v4.0.1
+                    type:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: type_server-file
+                    path:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: source/mei-source_canonicalized.xml
             customizations:
               type: object
               properties:
-                  customization:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'c-mei-all'
-                      name:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'MEI All'
-                      type:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'type_server-file'
-                      path:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'customizations/mei-all.xml'
+                customization:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: c-mei-all
+                    name:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: MEI All
+                    type:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: type_server-file
+                    path:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: customizations/mei-all.xml
             outputFormats:
               type: object
               properties:
-                  outputFormat:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        xml:
-                          name: 'id'
-                          attribute: true
-                        example: 'RelaxNG'
+                outputFormat:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      xml:
+                        name: id
+                        attribute: true
+                      example: RelaxNG
+
