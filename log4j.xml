@@ -8,7 +8,7 @@
         <PatternLayout
                 pattern="%%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n" />
     </Console>
-    <RollingFile name="rollingFile" fileName="${LOG_DIR}/debugging.out" filePattern="${LOG_DIR}/debugging.%d{dd-MMM}.out.gz" ignoreExceptions="false">
+    <RollingFile name="rollingFile" fileName="${LOG_DIR}/debugging.out" filePattern="${LOG_DIR}/debugging.%d{yyyy-dd-MMM}.out.gz" ignoreExceptions="false">
       <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
       <Policies>
         <OnStartupTriggeringPolicy />
