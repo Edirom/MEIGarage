@@ -151,7 +151,7 @@
         }
       }
     },
-    "/ege-webservice/Customization/{customization-setting}/{source}/{customization}": {
+    "/ege-webservice/Customization/{customization-setting}/{source}/{customization}/{output-document-type}": {
       "post": {
         "tags": [
           "ege-webservice"
@@ -192,6 +192,17 @@
               "format": "text/plain"
             },
             "example": "c-mei-all"
+          },
+          {
+            "name": "output-document-type",
+            "in": "path",
+            "description": "Customization",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "text/plain"
+            },
+            "example": "RelaxNG"
           }
         ],
         "requestBody": {
@@ -344,14 +355,14 @@
                 "xml": {
                   "attribute": true
                 },
-                "example": "Documents:TEI P5 XML Document:TEI,text/xml"
+                "example": "mei40,text/xml:mei40,text/xml"
               },
               "xlink-href": {
                 "type": "string",
                 "xml": {
                   "attribute": true
                 },
-                "example": "https://teigarage.tei-c.de/ege-webservice/Conversions/TEI%3Atext%3Axml/"
+                "example": "https://meigarage.edirom.de/ege-webservice/Conversions/mei40%3Atext%3Axml/"
               }
             }
           }
@@ -374,14 +385,14 @@
                 "xml": {
                   "attribute": true
                 },
-                "example": "Documents:TEI P5 XML Document:TEI,text/xml"
+                "example": "Documents:mei40,text/xml:mei40,text/xml"
               },
               "xlink-href": {
                 "type": "string",
                 "xml": {
                   "attribute": true
                 },
-                "example": "https://teigarage.tei-c.de/ege-webservice/Validation/TEI%3Atext%3Axml/"
+                "example": "https://meigarage.edirom.de/ege-webservice/Validation/mei40%3Atext%3Axml/"
               }
             }
           }
@@ -389,11 +400,11 @@
       },
       "DataInputType": {
         "type": "string",
-        "example": "TEI:text:xml"
+        "example": "mei40:text:xml"
       },
       "DataOutputType": {
         "type": "string",
-        "example": "odt:application:vnd.oasis.opendocument.text"
+        "example": "pdf-verovio:application:pdf"
       },
       "ValidationResult": {
         "type": "object",

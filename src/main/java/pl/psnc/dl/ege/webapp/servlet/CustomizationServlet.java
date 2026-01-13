@@ -88,7 +88,13 @@ public class CustomizationServlet extends HttpServlet {
                             description = "Customization",
                             required = true,
                             name = "customization",
-                            schema = @Schema(type = "string", format = "text/plain"))
+                            schema = @Schema(type = "string", format = "text/plain")),
+                    @Parameter(
+                            in = ParameterIn.PATH,
+                            description = "Output document type",
+                            required = true,
+                            name = "output-document-type",
+                            schema = @Schema(type= "string", format="text/plain"))
             },
             responses = {
                     @ApiResponse(
