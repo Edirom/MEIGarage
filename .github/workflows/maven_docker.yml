@@ -89,13 +89,13 @@ jobs:
           build-args: |
             BUILDTYPE=github
       # Use current README for DockerHub description
-      - name: Update repo description
-        uses: peter-evans/dockerhub-description@v5
-        with:
-          username: vifebot
-          password: ${{ secrets.VIFEBOT_DOCKERHUB_TOKEN }}
-          repository: edirom/meigarage
-          short-description: ${{ github.event.repository.description }}
+      #- name: Update repo description
+      #  uses: peter-evans/dockerhub-description@v5
+      #  with:
+      #    username: vifebot
+      #    password: ${{ secrets.VIFEBOT_DOCKERHUB_TOKEN }}
+      #    repository: edirom/meigarage
+      #    short-description: ${{ github.event.repository.description }}
 
   clean:
     name: remove untagged images from Github package registry
