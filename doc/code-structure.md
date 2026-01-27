@@ -130,6 +130,7 @@ In OOConverter weights are calculated as the sum of the input's and output's wei
 - create new release of mei-validator
 - update repository version of mei-validator dependency in GitHub (`mvn deploy`)
 - update the new version in MEIGarage dependency (in pom.xml)
+- for updating the webclient see https://github.com/Edirom/vife-meigarage-webclient/blob/dev/README.md
 
 ### mei-converter
 
