@@ -117,3 +117,37 @@ In this case you need to find Format.java file. There you can easily adjust the 
 ## Changing weights in OOConverter
 
 In OOConverter weights are calculated as the sum of the input's and output's weight. Therefore, if for example in the new version of OpenOffice.org its ability to read docx files improves rapidly and you would like to reflect this in the weightings, you need to find the appropriate input type in the appropriate file. In this case it would be DOCX in InputTextFormat.java. Now you simply change the value of the cost variable and it's done.
+
+# Updating for new TEI and MEI Versions
+
+## MEI
+
+### mei-validator
+
+- add new schema url to xml file src/main/resources/mei-validators.xml in [mei-validator](https://github.com/Edirom/mei-validator)
+- update junit tests if needed
+- update version of mei-validator
+- create new release of mei-validator
+- update repository version of mei-validator dependency in GitHub (`mvn deploy`)
+- update the new version in MEIGarage dependency (in pom.xml)
+- for updating the webclient see https://github.com/Edirom/vife-meigarage-webclient/blob/dev/README.md
+
+### mei-xsl-converter
+
+- add new conversions to src/main/java/de/edirom/meigarage/mei/Conversion.java, src/main/java/de/edirom/meigarage/mei/ConverterConfiguration.java and src/main/java/de/edirom/meigarage/mei/MEIXSLConverter.java
+- update junit tests if needed
+- update version of mei-validator
+- create new release of mei-validator
+- update repository version of mei-validator dependency in GitHub (`mvn deploy`)
+- update the new version in MEIGarage dependency (in pom.xml)
+
+### verovio-converter
+
+- update version numbers in src/main/java/de/edirom/meigarage/verovio/Conversion.java, src/main/java/de/edirom/meigarage/verovio/ConverterConfiguration.java and src/main/java/de/edirom/meigarage/verovio/VerovioConverter.java
+- update junit tests if needed
+- update version of verovio-converter
+- create new release of verovio-converter
+- update repository version of verovio-converter dependency in GitHub (`mvn deploy`)
+- update the new version in MEIGarage dependency (in pom.xml)
+
+## TEI
