@@ -21,10 +21,10 @@ ARG VERSION_MEILER=latest
 ARG WEBSERVICE_ARTIFACT=https://nightly.link/Edirom/MEIGarage/workflows/maven_docker/dev/artifact.zip
 ARG BUILDTYPE=local
 
-ENV CATALINA_WEBAPPS ${CATALINA_HOME}/webapps
-ENV OFFICE_HOME /usr/lib/libreoffice
-ENV TEI_SOURCES_HOME /usr/share/xml/tei
-ENV MEI_SOURCES_HOME /usr/share/xml/mei
+ENV CATALINA_WEBAPPS=${CATALINA_HOME}/webapps
+ENV OFFICE_HOME=/usr/lib/libreoffice
+ENV TEI_SOURCES_HOME=/usr/share/xml/tei
+ENV MEI_SOURCES_HOME=/usr/share/xml/mei
 
 USER root:root
 
@@ -139,7 +139,7 @@ RUN git clone --depth 1 -b main https://github.com/music-encoding/encoding-tools
 
 #https://github.com/w3c/musicxml/releases/latest
 RUN if [ "$VERSION_W3C_MUSICXML" = "latest" ] ; then \
-    VERSION_W3C_MUSICXML=$(curl "https://api.github.com/repos/w3c/musicxml/releases/latest" | grep -Po '"tag_name": "v\K.*?(?=")'); \    
+    VERSION_W3C_MUSICXML=$(curl "https://api.github.com/repositories/40168190/releases/latest" | grep -Po '"tag_name": "v\K.*?(?=")'); \    
     fi \
     && echo "W3C Music XML version set to ${VERSION_W3C_MUSICXML}" \
     # download the required stylesheet sources in the image and move them to the respective folders (${MEI_SOURCES_HOME})
