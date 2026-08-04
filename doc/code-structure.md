@@ -132,6 +132,22 @@ In OOConverter weights are calculated as the sum of the input's and output's wei
 - update the new version in MEIGarage dependency (in pom.xml)
 - for updating the webclient see https://github.com/Edirom/vife-meigarage-webclient/blob/dev/README.md
 
-### mei-converter
+### mei-xsl-converter
+
+- add new conversions to src/main/java/de/edirom/meigarage/mei/Conversion.java, src/main/java/de/edirom/meigarage/mei/ConverterConfiguration.java and src/main/java/de/edirom/meigarage/mei/MEIXSLConverter.java
+- update junit tests if needed
+- update version of mei-validator
+- create new release of mei-validator
+- update repository version of mei-validator dependency in GitHub (`mvn deploy`)
+- update the new version in MEIGarage dependency (in pom.xml)
+
+### verovio-converter
+
+- update version numbers in src/main/java/de/edirom/meigarage/verovio/Conversion.java, src/main/java/de/edirom/meigarage/verovio/ConverterConfiguration.java and src/main/java/de/edirom/meigarage/verovio/VerovioConverter.java
+- update junit tests if needed
+- update version of verovio-converter
+- create new release of verovio-converter
+- update repository version of verovio-converter dependency in GitHub (`mvn deploy`)
+- update the new version in MEIGarage dependency (in pom.xml)
 
 ## TEI
