@@ -227,7 +227,7 @@
     <dependency>
       <groupId>de.edirom.meigarage</groupId>
       <artifactId>mei-validator</artifactId>
-      <version>0.6.0</version>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
